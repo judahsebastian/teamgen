@@ -3,38 +3,33 @@ import { GlobalContext } from '../context/GlobalState';
 
 export const AddTransaction = () => {
   const [text, setText] = useState('');
-  const [amount, setAmount] = useState(0);
 
-  const { addTransaction } = useContext(GlobalContext);
+  const { addPlayer } = useContext(GlobalContext);
+  const { populateTeam1 } = useContext(GlobalContext);
+  const { players } = useContext(GlobalContext);
 
   const onSubmit = e => {
+
     e.preventDefault();
 
-    const newTransaction = {
-      id: Math.floor(Math.random() * 100000000),
-      text,
-      amount: +amount
+    if(text.trim() !== '' && players.length < 10){
+      const newPlayer = {
+        id: Math.floor(Math.random() * 100000),
+        text
+      }
+      addPlayer(newPlayer);
+      setText('')
     }
 
-    addTransaction(newTransaction);
   }
 
   return (
     <>
-      <h3>Add new transaction</h3>
-      <form onSubmit={onSubmit}>
+      <form className="add-player" onSubmit={onSubmit}>
         <div className="form-control">
-          <label htmlFor="text">Text</label>
-          <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter text..." />
+          <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter player name..." />
         </div>
-        <div className="form-control">
-          <label htmlFor="amount"
-            >Amount <br />
-            (negative - expense, positive - income)</label
-          >
-          <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter amount..." />
-        </div>
-        <button className="btn">Add transaction</button>
+        <button className="btn">Add player</button>
       </form>
     </>
   )

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Header } from './components/Header';
-import { Balance } from './components/Balance';
-import { IncomeExpenses } from './components/IncomeExpenses';
-import { TransactionList } from './components/TransactionList';
+import { PlayerList } from './components/PlayerList';
 import { AddTransaction } from './components/AddTransaction';
-
+import { GenerateTeams } from './components/GenerateTeams';
+import { Team1 } from './components/Team1';
 import { GlobalProvider } from './context/GlobalState';
 
 import './App.css';
@@ -14,10 +13,10 @@ function App() {
     <GlobalProvider>
       <Header />
       <div className="container">
-        <Balance />
-        <IncomeExpenses />
-        <TransactionList />
+        <Team1/>
+        <GenerateTeams/>
         <AddTransaction />
+        <PlayerList />
       </div>
     </GlobalProvider>
   );

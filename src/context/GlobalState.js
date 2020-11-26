@@ -3,7 +3,9 @@ import AppReducer from './AppReducer';
 
 // Initial state
 const initialState = {
-  transactions: []
+  players: [],
+  team1: [],
+  team2: []
 }
 
 // Create context
@@ -14,24 +16,42 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   // Actions
-  function deleteTransaction(id) {
+  function deletePlayer(id) {
     dispatch({
-      type: 'DELETE_TRANSACTION',
+      type: 'DELETE_PLAYER',
       payload: id
     });
   }
 
-  function addTransaction(transaction) {
+  function addPlayer(player) {
     dispatch({
-      type: 'ADD_TRANSACTION',
-      payload: transaction
+      type: 'ADD_PLAYER',
+      payload: player
+    });
+  }
+
+  function populateTeam1(team1){
+    dispatch({
+      type: 'FILL_TEAM_1',
+      payload: team1
+    });
+  }
+
+  function populateTeam2(team2){
+    dispatch({
+      type: 'FILL_TEAM_2',
+      payload: team2
     });
   }
 
   return (<GlobalContext.Provider value={{
-    transactions: state.transactions,
-    deleteTransaction,
-    addTransaction
+    players: state.players,
+    team1: state.team1,
+    team2: state.team2,
+    deletePlayer,
+    addPlayer,
+    populateTeam1,
+    populateTeam2
   }}>
     {children}
   </GlobalContext.Provider>);
